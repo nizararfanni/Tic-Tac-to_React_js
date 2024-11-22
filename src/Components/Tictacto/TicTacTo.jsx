@@ -3,12 +3,17 @@ import "./TictacTo.css";
 import circle_icon from "../Assets/circle.png";
 import cross_icon from "../Assets/cross.png";
 
+// array penampung 9 kotak
 let data = ["", "", "", "", "", "", "", "", ""];
 
 const TicTacTo = () => {
   let [count, setCount] = useState(0);
   let [lock, setLock] = useState(false);
   let tittleReff = useRef(null);
+  
+
+
+  // 9 box di bawah di gunakan untuk mereset 9 kotak menggunakan usereff
   let box1 = useRef(null);
   let box2 = useRef(null);
   let box3 = useRef(null);
@@ -20,6 +25,7 @@ const TicTacTo = () => {
   let box9 = useRef(null);
   let box_array = [box1, box2, box3, box4, box5, box6, box7, box8, box9];
 
+  // function klik agar muncul gambar sesuai urutan o dan x
   const Toggle = (e, num) => {
     if (lock) {
       return 0;
@@ -36,6 +42,8 @@ const TicTacTo = () => {
     checkWin();
   };
 
+
+  // arrow function semua kemungkinan menang dalm game tic-tac-to
   const checkWin = () => {
     if (data[0] === data[1] && data[1] === data[2] && data[2] !== "") {
       won(data[2]);
@@ -57,6 +65,7 @@ const TicTacTo = () => {
       won(data[6]);
     }
   };
+  // arrow fucntion ucapan kemenangan
   const won = (winner) => {
     setLock(true);
     if (winner === "x") {
@@ -65,6 +74,7 @@ const TicTacTo = () => {
       tittleReff.current.innerHTML = `Congratulations <img src=${circle_icon}> wins`;
     }
   };
+  // arrow fucntion untuk tombol reset ketika ada yang memenagkan sebuah game
   const reset = () => {
     setLock(true);
     data = ["", "", "", "", "", "", "", "", ""];
